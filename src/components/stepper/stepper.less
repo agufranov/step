@@ -1,0 +1,71 @@
+@tick-size: 12px;
+@line-width: 4px;
+@line-color: blue;
+@inactive-color: gray;
+@dt: .2s;
+.stepper {
+  width: 400px;
+  display: flex;
+  &__step {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .stepper__line_left {
+      transition: all @dt linear;
+    }
+    .stepper__tick, .stepper__title {
+      transition: all @dt linear;
+    }
+    &_active {
+      .stepper__title {
+        color: @line-color;
+      }
+      .stepper__line {
+        background-color: @line-color;
+      }
+      .stepper__tick {
+        border-color: @line-color;
+      }
+      .stepper__line_right {
+        transition: all @dt linear;
+      }
+    }
+    &_current {
+      .stepper__line_left {
+        transition: all @dt linear @dt;
+      }
+      .stepper__line_right {
+        background-color: @inactive-color;
+        transition: all @dt linear @dt;
+      }
+      .stepper__tick, .stepper__title {
+        transition: all @dt linear @dt;
+      }
+    }
+  }
+  &__title {
+    text-align: center;
+    color: @inactive-color;
+    cursor: pointer;
+  }
+  &__lines {
+    display: flex;
+  }
+  &__tick {
+    border: @line-width solid @inactive-color;
+    width: @tick-size;
+    height: @tick-size;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__line {
+    height: @line-width;
+    background-color: @inactive-color;
+    flex: 1 1 auto;
+    margin-top: (@tick-size + @line-width) / 2;
+    &_hidden {
+      visibility: hidden;
+    }
+  }
+}
